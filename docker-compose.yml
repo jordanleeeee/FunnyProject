@@ -1,0 +1,43 @@
+version: "3"
+services:
+  nginx:
+    ports:
+      - "80:80"
+    image: nginx:stable-alpine
+    depends_on:
+      - question-bank
+      - react
+      - spider
+  question-bank:
+    build: 
+      context: ./QuestionBankBackend
+      dockerfile: Dockerfile
+    # image: jordanleeeee/question-bank
+    environment:
+      - PORT=3030
+      - MONGO_USER=root
+      - MONGO_AC_PW=pw123456
+    depends_on: # start it after mongodb is ready
+      - mongodb
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pw123456
+    volumes:
+      - mongodbVolume:/data/db
+      - ./mongodb/dump:/home:ro
+    ports: 
+      - 27017:27017
+  react:
+    build:
+      context: ./ReactQuestionBank
+    stdin_open: true 
+    tty: true
+  spider:
+    build:
+      context: ./WebImageCrawler
+  redis:
+    image: redis
+volumes:
+  mongodbVolume:

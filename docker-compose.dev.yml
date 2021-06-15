@@ -33,6 +33,3 @@ services:
       - 3040:3040
     volumes: 
       - ./WebImageCrawler:/usr/src/app
-  redis:
-    ports: 
-      - 6379:6379

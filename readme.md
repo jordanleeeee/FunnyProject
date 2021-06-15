@@ -13,7 +13,15 @@ git clone https://github.com/jordanleeeee/WebImageCrawler.git
 
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
-then you can have fun in http://www.jordanleeeee.com
+
+run these two command for the first time it restore database
+```
+sudo docker exec -it funnyproject_mongodb_1 bash
+mongorestore /home/ -u root
+exit
+```
+
+hahaha, those are private repo, you cannot access it. However you can have fun in http://www.jordanleeeee.com
 
 <br/>
 To terminate the project
@@ -22,18 +30,33 @@ To terminate the project
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 ```
 
-Language/Framework/technology used:
-- frondend
+### Language/Framework/technology used:
+- Frondend
   - react
     - react router
-    - ...
-- backend
+    - functional component
+    - class component
+  - i18n
+- Backend
   - nodejs
     - express
+      - express router
+      - express middleware
+    - aws-sdk
+      - multer-s3
+    - winston logging
+    - pdfkit
+    - jszip
   - python
     - flask
-  - ...
-- devOps
+    - beautifulsoup
+  - database
+    - mongodb
+    - redis
+- DevOps
   - docker
   - docker compose
-  - ...
+  - nginx
+
+### Todo:
+  - fix cannot multiple login bug

@@ -21,7 +21,7 @@ git clone https://github.com/jordanleeeee/ReactQuestionBank.git
 git clone https://github.com/jordanleeeee/QuestionBankBackend.git
 git clone https://github.com/jordanleeeee/WebImageCrawler.git
 
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+sudo docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
 
 run these two command for the first time to restore database
@@ -72,3 +72,4 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
   - fix cannot multiple login bug
   - add env config in frontend in an attempt to connecting to differet host in dev and prod environment
   - fix request timeout issue
+  - setup regular schedule to clean cache

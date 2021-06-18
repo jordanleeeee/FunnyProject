@@ -11,6 +11,8 @@ services:
       - NODE_ENV=production
     volumes:
       - ./QuestionBankBackend/logs:/app/logs
+    deploy:
+      replicas: 2
   react:
     build:
       dockerfile: Dockerfile.prod

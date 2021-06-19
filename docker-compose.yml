@@ -4,6 +4,8 @@ services:
     ports:
       - "80:80"
     image: nginx:stable-alpine
+    volumes:
+      - ./nginx/logs:/var/log/nginx
     depends_on:
       - question-bank
       - react

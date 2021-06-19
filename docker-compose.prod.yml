@@ -22,5 +22,3 @@ services:
     environment:
       - NODE_ENV=production
       - API_END_POINT=jordanleeeee
-  spider:
-    command: python rest.py --mode=development

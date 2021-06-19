@@ -33,3 +33,5 @@ services:
       - 3040:3040
     volumes: 
       - ./WebImageCrawler:/usr/src/app
+    command: python rest.py --mode=development
+    tty: true

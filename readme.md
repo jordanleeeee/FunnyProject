@@ -37,7 +37,7 @@ hahaha, those are private repo, you cannot access it. However you can have fun i
 To terminate the project
 
 ```
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
+sudo docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 ```
 
 ### Language/Framework/technology used:

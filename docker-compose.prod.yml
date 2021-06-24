@@ -25,7 +25,7 @@ services:
   filebeat:
     build: ./filebeat
     volumes:
-      - ./nginxlog/logs:/var/log/nginx:ro
+      - ./nginx/logs:/var/log/nginx:ro
     depends_on:
       - nginx
       - kibana

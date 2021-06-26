@@ -1,0 +1,24 @@
+version: "3"
+services:
+  nginx:
+    volumes:
+      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf:ro
+  question-bank:
+    build: 
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./QuestionBankBackend/logs:/app/logs
+    deploy:
+      replicas: 2
+  react:
+    build:
+      dockerfile: Dockerfile.prod
+      args:
+        NODE_ENV: production
+        API_END_POINT: jordanleeeee
+    environment:
+      - NODE_ENV=production
+      - API_END_POINT=jordanleeeee

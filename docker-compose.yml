@@ -39,6 +39,8 @@ services:
   spider:
     build:
       context: ./WebImageCrawler
+    volumes:
+       - ./WebImageCrawler/image:/usr/src/app/image
   redis:
     image: redis
     ports: 

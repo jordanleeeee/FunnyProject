@@ -5,5 +5,5 @@ services:
       - "80:80"
     image: nginx:stable-alpine
     volumes:
-      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/staticSite.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/static:/usr/share/nginx/html/

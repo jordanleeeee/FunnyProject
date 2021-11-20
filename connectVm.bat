@@ -1,1 +1,0 @@
-ssh -i FunnyProjectUbuntu.pem ubuntu@www.jordanleeeee.com

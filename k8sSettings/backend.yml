@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: question-bank
+  namespace: funny
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: question-bank
+  revisionHistoryLimit: 5
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: question-bank
+    spec:
+      containers:
+      - name: question-bank
+        image: jordanleeeee/funny_project:backend-v2
+        env:
+          - name: MONGO_USER
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: mongouser
+          - name: MONGO_AC_PW
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: mongopw
+        readinessProbe:
+          httpGet:
+            path: /api/v1
+            scheme: HTTP
+            port: 3030
+          initialDelaySeconds: 10
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: question-bank-service
+  namespace: funny
+spec:
+  type: NodePort
+  ports:
+  - port: 3030
+    targetPort: 3030
+  selector:
+    app: question-bank

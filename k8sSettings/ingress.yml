@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: funny-backend
+  namespace: funny
+spec:
+  rules:
+  - host: www.jordanleeeee.com
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 3000
+      - pathType: ImplementationSpecific
+        path: "/api/v1"
+        backend:
+          service:
+            name: question-bank-service
+            port:
+              number: 3030
+    

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-crawler
+  namespace: funny
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: image-crawler
+  revisionHistoryLimit: 5
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: image-crawler
+    spec:
+      containers:
+      - name: image-crawler
+        image: jordanleeeee/funny_project:image-crawler-v8
+        env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+        readinessProbe:
+          httpGet:
+            path: /api/v2
+            scheme: HTTP
+            port: 3040
+            httpHeaders:
+              - name: Referer
+                value: QuestionBankBackend
+          initialDelaySeconds: 10
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-crawler-service
+  namespace: funny
+spec:
+  ports:
+  - port: 3040
+    targetPort: 3040
+  selector:
+    app: image-crawler
